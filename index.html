@@ -155,10 +155,55 @@
             padding-top: 20px;
             font-style: italic;
         }
+
+        .rank-path {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 10px;
+        }
+        .rank-step {
+            background: #1e232c;
+            border-radius: 12px;
+            padding: 15px 20px;
+            border-left: 5px solid #e28e35;
+        }
+        .rank-step .rank-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #8a1c1c;
+            margin-bottom: 8px;
+        }
+        .rank-step ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .rank-step ul li {
+            margin-bottom: 4px;
+        }
+        .rank-step .hint {
+            color: #6a6f7a;
+            font-style: italic;
+            margin-bottom: 4px;
+        }
+        .rank-step .task {
+            color: #e28e35;
+        }
+        .rank-step .extra-note {
+            margin-top: 8px;
+            color: #6a6f7a;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 500px) {
             .title { font-size: 2.8rem; }
             .container { padding: 20px; }
             .nav-btn { font-size: 1.1rem; padding: 14px 0; }
+            .rank-step .rank-title { font-size: 1rem; }
         }
     </style>
 </head>
@@ -167,12 +212,13 @@
         <div class="title">Heartless Dynasty</div>
 
         <div class="nav">
-            <button class="nav-btn active" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
+            <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
             <button class="nav-btn" onclick="showSection('rules')">ПРАВИЛА</button>
             <button class="nav-btn" onclick="showSection('rp')">ОТЫГРОВКИ</button>
+            <button class="nav-btn active" onclick="showSection('promotion')">ПОВЫШЕНИЕ</button>
         </div>
 
-        <div id="info" class="section active">
+        <div id="info" class="section">
             <div class="divider"></div>
             <div class="info-block">
                 <div class="info-grid">
@@ -262,6 +308,35 @@
                 /me прикрепил значок на груди человека<br>
                 /do На значке чётко написано название семьи. Носи с гордостью.<br><br>
                 <span style="color: #6a6f7a;">Игроку с nonRP ником скажите, как поменять на RP. Имя_Heartles (необязательно, но желательно такую фамилию)</span>
+            </div>
+        </div>
+
+        <div id="promotion" class="section active">
+            <div class="divider"></div>
+            <div class="rank-path">
+                <div class="rank-step">
+                    <div class="rank-title">[1] Stranger → [2] Junior</div>
+                    <div class="hint">Для тех, кто отказался принимать в семью других по RP технике.</div>
+                    <div class="task">Присутствовать на 2-х мероприятиях (скрины с /stime в конце каждого МП).</div>
+                </div>
+
+                <div class="rank-step">
+                    <div class="rank-title">[2] Junior → [3] Mine</div>
+                    <div class="task">Принять в семью 1 человека (скрин с /stime, RP обязательно!)</div>
+                    <div class="task">Присутствовать на 3-х мероприятиях.</div>
+                </div>
+
+                <div class="rank-step">
+                    <div class="rank-title">[3] Mine → [4] Senior</div>
+                    <div class="task">Провести 1 любое мероприятие (скрины начала и конца с /stime).</div>
+                    <div class="task">Принять в семью 3 человека.</div>
+                    <div class="extra-note">Сфоткаться с главой или любым замом (необязательно, но желательно)</div>
+                </div>
+
+                <div class="rank-step" style="border-left-color: #d32f2f;">
+                    <div class="rank-title">[4] Senior → [5] Looking man</div>
+                    <div style="color: #e0e0e0;">По доверию.</div>
+                </div>
             </div>
         </div>
 
