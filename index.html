@@ -155,7 +155,6 @@
             padding-top: 20px;
             font-style: italic;
         }
-
         .rank-path {
             display: flex;
             flex-direction: column;
@@ -198,12 +197,57 @@
             font-style: italic;
             font-size: 0.9rem;
         }
-
+        .event-block {
+            background: #1e232c;
+            border-radius: 12px;
+            padding: 18px;
+            border-left: 5px solid #e28e35;
+            margin-bottom: 20px;
+        }
+        .event-block .event-title {
+            color: #e28e35;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .event-block ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .event-block ul li {
+            margin-bottom: 4px;
+        }
+        .event-block .sub {
+            color: #a0a5b0;
+            font-size: 0.95rem;
+        }
+        .event-block .highlight {
+            color: #e28e35;
+        }
+        .event-ideas .idea-box {
+            background: #16273e;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #ffd700;
+        }
+        .event-ideas .idea-box strong {
+            color: #e28e35;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        .event-ideas .idea-box p {
+            margin: 0;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            color: #cfd8e0;
+        }
         @media (max-width: 500px) {
             .title { font-size: 2.8rem; }
             .container { padding: 20px; }
             .nav-btn { font-size: 1.1rem; padding: 14px 0; }
-            .rank-step .rank-title { font-size: 1rem; }
         }
     </style>
 </head>
@@ -215,7 +259,8 @@
             <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
             <button class="nav-btn" onclick="showSection('rules')">ПРАВИЛА</button>
             <button class="nav-btn" onclick="showSection('rp')">ОТЫГРОВКИ</button>
-            <button class="nav-btn active" onclick="showSection('promotion')">ПОВЫШЕНИЕ</button>
+            <button class="nav-btn" onclick="showSection('promotion')">ПОВЫШЕНИЕ</button>
+            <button class="nav-btn active" onclick="showSection('events')">МЕРОПРИЯТИЯ</button>
         </div>
 
         <div id="info" class="section">
@@ -313,7 +358,7 @@
             </div>
         </div>
 
-        <div id="promotion" class="section active">
+        <div id="promotion" class="section">
             <div class="divider"></div>
             <div class="rank-path">
                 <div class="rank-step">
@@ -338,6 +383,38 @@
                 <div class="rank-step" style="border-left-color: #d32f2f;">
                     <div class="rank-title">[4] Senior → [5] Looking man</div>
                     <div style="color: #e0e0e0;">По доверию.</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="events" class="section active">
+            <div class="divider"></div>
+            
+            <div class="event-block">
+                <div class="event-title">Правила проведения мероприятий</div>
+                <ul>
+                    <li>Мероприятия может проводить любой член семьи, в любое время<li>
+                    <li><strong>Призовой фонд обязателен</strong> (будь то деньги или имущество).</li>
+                    <li>Если МП на деньги — приз получают все участники, даже проигравшие. Победитель забирает 100% фонда, остальные — от <span class="highlight">10.000$</span> (или больше, по желанию).</li>
+                    <li>Скинешь скриншот конца МП с <span class="highlight">/stime</span> заместителю <span class="highlight">Reydan Heartless</span> — получишь сверху ещё немного денег.</li>
+                </ul>
+            </div>
+
+            <div class="event-title" style="color: #e28e35; font-size: 1.4rem; text-align: center; margin: 20px 0;">Идеи для мероприятий</div>
+            <div class="event-ideas">
+                <div class="idea-box">
+                    <strong>Догони меня!</strong>
+                    <p>Организатор убегает, все участники должны его догнать и ударить. Кто догнал — победил. По желанию можно устроить ещё раунды для остальных.</p>
+                </div>
+
+                <div class="idea-box">
+                    <strong>Русская Рулетка</strong>
+                    <p>Все в строю. Организатор по очереди вводит <span style="color: #ffd700;">/try вин?</span> или игрок называет сторону Орла или Решки. Монетка подбрасывается. Если выпала противоположная сторона — участник выбывает. И так ещё для всех, пока не останется последний — победитель.</p>
+                </div>
+
+                <div class="idea-box">
+                    <strong>Забег (или заплыв)</strong>
+                    <p>Игроки соревнуются на перегонки.</p>
                 </div>
             </div>
         </div>
