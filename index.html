@@ -216,7 +216,7 @@
             margin: 10px 0;
         }
         .event-block ul li {
-            margin-bottom: 4px;
+            margin-bottom: 9px;
         }
         .event-block .sub {
             color: #a0a5b0;
@@ -244,6 +244,23 @@
             font-size: 0.95rem;
             color: #cfd8e0;
         }
+        .album-status {
+            text-align: center;
+            color: #6a6f7a;
+            font-style: italic;
+            padding: 20px 0;
+        }
+        .album-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .album-grid img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+            border: 1px solid #2a2f3a;
+        }
         @media (max-width: 500px) {
             .title { font-size: 2.8rem; }
             .container { padding: 20px; }
@@ -256,14 +273,15 @@
         <div class="title">Heartless Dynasty</div>
 
         <div class="nav">
-            <button class="nav-btn" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
+            <button class="nav-btn active" onclick="showSection('info')">ИНФОРМАЦИЯ</button>
             <button class="nav-btn" onclick="showSection('rules')">ПРАВИЛА</button>
             <button class="nav-btn" onclick="showSection('rp')">ОТЫГРОВКИ</button>
             <button class="nav-btn" onclick="showSection('promotion')">ПОВЫШЕНИЕ</button>
-            <button class="nav-btn active" onclick="showSection('events')">МЕРОПРИЯТИЯ</button>
+            <button class="nav-btn" onclick="showSection('events')">МЕРОПРИЯТИЯ</button>
+            <button class="nav-btn" onclick="showSection('album')">ФОТОАЛЬБОМ</button>
         </div>
 
-        <div id="info" class="section">
+        <div id="info" class="section active">
             <div class="divider"></div>
             <div class="info-block">
                 <div class="info-grid">
@@ -387,7 +405,7 @@
             </div>
         </div>
 
-        <div id="events" class="section active">
+        <div id="events" class="section">
             <div class="divider"></div>
             
             <div class="event-block">
@@ -419,12 +437,54 @@
             </div>
         </div>
 
+        <div id="album" class="section">
+            <div class="divider"></div>
+            <div id="album-status" class="album-status">Загрузка фото...</div>
+            <div id="album-grid" class="album-grid"></div>
+        </div>
+
         <div class="footer">
             Для настоящих своих людей. Уважайте других и работайте в команде!
         </div>
     </div>
 
     <script>
+        // Настройки фотоальбома: репозиторий и папка на GitHub, откуда берутся фото
+        const ALBUM_OWNER = 'roldober';
+        const ALBUM_REPO = 'heartless';
+        const ALBUM_FOLDER = 'album';
+
+        async function loadAlbum() {
+            const status = document.getElementById('album-status');
+            const grid = document.getElementById('album-grid');
+            try {
+                const url = `https://api.github.com/repos/${ALBUM_OWNER}/${ALBUM_REPO}/contents/${ALBUM_FOLDER}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('Папка не найдена');
+                const files = await res.json();
+                const images = files
+                    .filter(f => f.type === 'file' && /\.(png|jpe?g)$/i.test(f.name))
+                    .sort((a, b) => a.name.localeCompare(b.name));
+
+                if (images.length === 0) {
+                    status.textContent = 'Пока нет ни одного фото.';
+                    return;
+                }
+
+                status.style.display = 'none';
+                images.forEach(file => {
+                    const img = document.createElement('img');
+                    img.src = file.download_url;
+                    img.alt = file.name;
+                    img.loading = 'lazy';
+                    grid.appendChild(img);
+                });
+            } catch (err) {
+                status.textContent = 'Не удалось загрузить фотоальбом. Проверьте, что папка "' + ALBUM_FOLDER + '" существует в репозитории.';
+            }
+        }
+        window.addEventListener('DOMContentLoaded', loadAlbum);
+
         function showSection(id) {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
